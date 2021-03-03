@@ -13,8 +13,8 @@ const methodOverride = require('method-override');
 
 // postgresql
 const pg = require('pg');
-// const client = new pg.Client(process.env.DATABASE_URL);
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
+const client = new pg.Client(process.env.DATABASE_URL);
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
 
 //Application Setup
 const PORT = process.env.PORT || 3030;
@@ -39,7 +39,8 @@ server.delete('/books/:bookID', deleteBook);
 
 // Home route
 function homeRoute(req, res) {
-    let SQL = `SELECT * FROM books;`;
+    // let SQL = `SELECT * FROM books;`;
+    let SQL = 'SELECT books.id as id, title, isbn, author_id, img, description, authors.name as author FROM books, authors WHERE books.author_id=authors.id;';
     client.query(SQL)
         .then(allBooks => {
             res.render('pages/index', { bookList: allBooks.rows });
@@ -50,7 +51,8 @@ function homeRoute(req, res) {
 }
 
 function bookDetails(req, res) {
-    let SQL = `SELECT * from books WHERE id=${req.params.bookID};`;
+    // let SQL = `SELECT * from books WHERE id=${req.params.bookID};`;
+    let SQL = `SELECT books.id as id, title, isbn, author_id, img, description, authors.name as author FROM books, authors WHERE books.author_id=authors.id AND books.id=${req.params.bookID};`;
     client.query(SQL)
         .then(result => {
             res.render('pages/books/show', { book: result.rows[0] })
