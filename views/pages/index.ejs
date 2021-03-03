@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../layout/head') %>
+
+    <body>
+        <%- include('../layout/header') %>
+            <main>
+                <span class="header">Saved Books</span>
+                <p>
+                    Total Books: <%= bookList.length %>
+                </p>
+                <% bookList.forEach(book=> { %>
+                    <div class="card">
+                        <img src='<%=book.img %>' alt="Book Cover">
+                        <h2>
+                            <%= book.title %>
+                        </h2>
+                        <h3>
+                            <%= book.author %>
+                        </h3>
+                        <br>
+                        <br>
+                        <a href="/books/<%= book.id %>">View Details</a>
+                    </div>
+                    <% }) %>
+            </main>
+            <%- include('../layout/footer') %>
+
+    </body>
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../layout/head') %>
+
+    <body>
+        <%- include('../layout/header') %>
+
+            <main>
+                <h1>ERROR!!</h1>
+                <details>
+                    <summary>You are facing an error, click here for more details</summary>
+                    <p>Error status: <%= error.status %> <br>
+                            Error Message: <%= error.error %>
+                    </p>
+                </details>
+            </main>
+            <%- include('../layout/footer') %>
+
+    </body>
+
+</html>

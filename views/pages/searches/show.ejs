@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../../layout/head') %>
+
+    <body>
+        <%- include('../../layout/header') %>
+
+            <main>
+                <span class="header">Search Results</span>
+
+                <% books.forEach(book=>{ %>
+                    <div class="card">
+                        <img src='<%=book.img %>' alt="Book Cover">
+                        <h2>
+                            <%= book.title %>
+                        </h2>
+                        <h3>
+                            <%= book.author %>
+                        </h3>
+                        <p class="description">
+                            <%= book.description %>
+                        </p>
+                        <form action='/books' method="POST">
+                            <input name="title" value="<%= book.title %>" class="hidden">
+                            <input name="author" value="<%= book.author %>" class="hidden">
+                            <input name="description" value="<%= book.description %>" class="hidden">
+                            <input name="img" value="<%= book.img %>" class="hidden">
+                            <input name="isbn" value="<%= book.isbn %>" class="hidden">
+                            <input name="shelf" value="<%= book.shelf %>" class="hidden">
+
+                            <button type="submit">Select This Book</button>
+                        </form>
+                    </div>
+                    <% }) %>
+
+            </main>
+            <%- include('../../layout/footer') %>
+
+    </body>
+
+</html>

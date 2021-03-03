@@ -1,0 +1,35 @@
+<style>
+    input {
+        width: 35%;
+    }
+</style>
+
+<section class="card">
+    <img src='<%=book.img %>' alt="Book Cover">
+    <h2>
+        <%= book.title %>
+    </h2>
+    <h3>
+        <%= book.author %>
+    </h3>
+    <p class="description">
+        <%= book.description %>
+    </p>
+    <p>
+        ISBN: <%= book.isbn %>
+    </p>
+    <p>
+        Bookshelf: <%= book.shelf %>
+    </p>
+    <div id="buttons">
+        <form>
+            <button type='button' id="edit">Update Details</button>
+        </form>
+        <form action="/books/<%= book.id %>?_method=DELETE" method='POST'>
+            <button type="submit">Delete Book</button>
+        </form>
+    </div>
+    <div id='editBook' class="modal">
+        <%- include('edit')-%>
+    </div>
+</section>
